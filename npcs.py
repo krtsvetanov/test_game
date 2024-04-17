@@ -13,6 +13,7 @@ class Enemy:
             defense (int): The defense power of the enemy.
         '''
         self.health = health
+        self.current_health = health
         self.attack = attack
         self.defense = defense
 
@@ -24,7 +25,7 @@ class Enemy:
             hero (Hero): The hero to attack.
         '''
         damage = max(0, self.attack - hero.defense)
-        hero.health -= damage
+        hero.current_health -= damage
         print(f"{self.__class__.__name__} attacks {hero.__class__.__name__} for {damage} damage!")
 
 class Goblin(Enemy):
@@ -68,5 +69,5 @@ class Dragon(Enemy):
             hero (Hero): The hero to breathe fire on.
         '''
         damage = 10
-        hero.health -= damage
+        hero.current_health -= damage
         print(f"Dragon breathes fire on {hero.__class__.__name__} for {damage} damage!")
