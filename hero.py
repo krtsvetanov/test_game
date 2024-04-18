@@ -14,6 +14,7 @@ class Hero:
             magic_power (int): The magical power of the hero.
         '''
         self.health = health
+        self.current_health = health
         self.attack = attack
         self.defense = defense
         self.magic_power = magic_power
@@ -26,7 +27,7 @@ class Hero:
             enemy (Hero): The enemy to attack.
         '''
         damage = max(0, self.attack - enemy.defense)
-        enemy.health -= damage
+        enemy.current_health -= damage
         print(f"{self.__class__.__name__} attacks {enemy.__class__.__name__} for {damage} damage!")
 
     def drink_potion(self, potion):
@@ -34,7 +35,7 @@ class Hero:
         Restore health by eating.
         '''
         if potion == 'Healing potion':
-            self.health += 5
+            self.current_health = min(self.health, self.current_health + 5)
             print(f"{self.__class__.__name__} drinks potion and restores health.")
         elif potion == 'Potion of power':
             self.attack += 1
@@ -46,7 +47,7 @@ class Hero:
         '''
         Restore health and mana by sleeping.
         '''
-        self.health += 10
+        self.current_health = self.health
         print(f"{self.__class__.__name__} sleeps and restores health.")
 
 class Warrior(Hero):
