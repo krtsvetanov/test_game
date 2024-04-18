@@ -1,6 +1,7 @@
 from weather import Calendar, WeatherToday
 from magic_system import MagicSystem
 from hero import Warrior, Rogue, Wizard
+from npcs import Goblin
 
 def choose_hero_class():
     '''
@@ -42,5 +43,17 @@ while True:
         
         print(f'Day {day} of {season}, the weather is {weather_today.weather}')
         # print(f'The fire bonus today is {fire_magic_bonus}\nThe ice bonus today is {ice_magic_bonus}')
+    
+    # Test fight at the end of the year
+    enemy = Goblin()
+    fight_command = input("Enter command to fight: ")
+    if fight_command == 'attack':
+        hero.attack_enemy(enemy)
+    elif fight_command == 'cast spell':
+        hero.cast_spell(enemy)
+        print(enemy.current_health)
+    if enemy.current_health <= 0:
+        print('You killed the enemy. The game ends.')
+        break
 
 print("End of program")
